@@ -1,0 +1,316 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1F1JjFdi4c4aeyxO_TGDQLasfg6TvAawmXhQkmBlgTg0",
+          "mode": "list",
+          "cachedResultName": "แบบฟอร์มประเมินสุขภาพก่อนการเทรน (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1F1JjFdi4c4aeyxO_TGDQLasfg6TvAawmXhQkmBlgTg0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1217295188,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1F1JjFdi4c4aeyxO_TGDQLasfg6TvAawmXhQkmBlgTg0/edit#gid=1217295188"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -736,
+        -32
+      ],
+      "id": "4625620c-e867-47e4-a7f7-1916a7452160",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "nG8GarhTHoM67ovy",
+          "name": "Google Sheets Trigger account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=คุณคือเทรนเนอร์ส่วนตัว ช่วยคำนวณและสรุปผลสุขภาพของลูกค้าตามข้อมูลนี้ :\nชื่อ : {{ $json[\"Name\"] }}\nเพศ : {{ $json[\"Gender\"] }}\nน้ำหนัก : {{ $json[\"Weight\"] }}\nส่วนสูง : {{ $json[\"Height\"] }}\nระดับกิจกรรม : {{ $json[\"Activity\"] }}\nเป้าหมาย : {{ $json[\"Goal\"] }}\nช่วยคำนวณ BMI, ประมาณค่า TDEE",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -560,
+        -224
+      ],
+      "id": "ed7d29f5-6ba2-414c-949b-3555c9359397",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -16
+      ],
+      "id": "d0c929d3-01e4-40c4-ab01-6f265af77e9f",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "yISqRMSRydj4lYGS",
+          "name": "Google Gemini(PaLM) Api account 7"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1QVgk-C7AJvnn08-Iml6jZP_QYQ7OXuCv",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1QVgk-C7AJvnn08-Iml6jZP_QYQ7OXuCv"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -304,
+        -32
+      ],
+      "id": "5550e799-ecb9-4305-a1f8-537db86daa5c",
+      "name": "Create folder",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "PgrdVeqmQFIDhWA6",
+          "name": "Google Drive account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=",
+        "subject": "หวัดดีจ้า",
+        "emailType": "text",
+        "message": "ออกกำลังกายกัน",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        32,
+        -32
+      ],
+      "id": "fb7d55c5-87e8-4006-b568-a70de5e25737",
+      "name": "Send a message",
+      "webhookId": "c3a87a15-9237-4f3c-a035-3669ce8d0bef",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "0dcW6PaTQ31Ggis8",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1F1JjFdi4c4aeyxO_TGDQLasfg6TvAawmXhQkmBlgTg0",
+          "mode": "list",
+          "cachedResultName": "แบบฟอร์มประเมินสุขภาพก่อนการเทรน (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1F1JjFdi4c4aeyxO_TGDQLasfg6TvAawmXhQkmBlgTg0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1217295188,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1F1JjFdi4c4aeyxO_TGDQLasfg6TvAawmXhQkmBlgTg0/edit#gid=1217295188"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -128,
+        -32
+      ],
+      "id": "03e75bd3-ecdb-4289-8a08-0c1f4689a3fc",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hm7rV9UpFxWg8VWe",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1F1JjFdi4c4aeyxO_TGDQLasfg6TvAawmXhQkmBlgTg0",
+          "mode": "list",
+          "cachedResultName": "แบบฟอร์มประเมินสุขภาพก่อนการเทรน (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1F1JjFdi4c4aeyxO_TGDQLasfg6TvAawmXhQkmBlgTg0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1217295188,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1F1JjFdi4c4aeyxO_TGDQLasfg6TvAawmXhQkmBlgTg0/edit#gid=1217295188"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        192,
+        128
+      ],
+      "id": "d7f038b5-9ed8-40a0-9d8f-ebab458c520a",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ncazBYcrHqegvEQt",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "66010915524@msu.ac.th",
+          "mode": "list",
+          "cachedResultName": "66010915524@msu.ac.th"
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        192,
+        -192
+      ],
+      "id": "c57d0e8b-0127-4e79-99cd-112f62fcc66e",
+      "name": "Create an event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "HTNPN4xgoeBTOTPa",
+          "name": "Google Calendar account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create folder": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create an event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9af4e814-426a-43cb-8c52-2f22841a646e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4b6110bf40385a4286462586d5957760479641900e1b23f787463a721eac0c57"
+  },
+  "id": "PjBTvc61aC1Guuy6",
+  "tags": []
+}
